@@ -12,39 +12,41 @@ include("connection.php");
     <thead class="thead-dark">
     <tr> 
         <th scope="col">No</th>
-        <th scope="col">Tgl Laporan</th>
-        <th scope="col">Jenis Laporan</th>
-        <th scope="col">ID Barang</th>
-        <th scope="col">ID User</th>
+        <th scope="col">ID_Laporan</th>
         <th scope="col">Nama Barang</th>
+        <th scope="col">Username</th>
+        <th scope="col">Hak Akses</th>
         <th scope="col">Jumlah</th>
+        <th scope="col">Tgl Laporan</th>
+        <th scope="col">Aksi</th>
     </tr>
     </thead>
 
     <tbody>
 <?php
     $no=1;
-    $query=("SELECT * FROM laporan");
+    $query=("SELECT * FROM view_laporan");
     $lihat = mysqli_query($con, $query) or die('Error, query failed. ' . mysqli_error());
     $jml_data=mysqli_num_rows($lihat);
     while($r=mysqli_fetch_array($lihat)){
 ?>
 <tr>
         <td><?= $no ?>.</td>
-        <td><?= $r['tgl_laporan']; ?></td>
-        <td><?= $r['jenis_laporan']; ?></td>
-        <td><?= $r['id_barang']; ?></td>
-        <td><?= $r['id_user']; ?></td>
+        <td><?= $r['id_laporan']; ?></td>
         <td><?= $r['nama_barang']; ?></td>
+        <td><?= $r['username']; ?></td>
+        <td><?= $r['hak_akses']; ?></td>
         <td><?= $r['jumlah']; ?></td>
+        <td><?= $r['tgl_laporan']; ?></td>
+        
         
         
 
 
         <td align="center">
-           <a href="laporan_detail.php?halaman=laporan_detail&id=<?= $r['id_barang'];?>" title="Detail Data" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
-            <a href="?halaman=user_edit&id=<?php echo"$r[id_barang]";?>" title="Edit Data" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> 
-            <a href="delete_laporan.php?halaman=user_delete&id_barang=<?php echo"$r[id_barang]";?>" title="Hapus Data" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+           <a href="laporan_detail.php?halaman=laporan_detail&id=<?= $r['id_laporan'];?>" title="Detail Data" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a>
+            <a href="?halaman=user_edit&id=<?php echo $r['id_laporan'];?>" title="Edit Data" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a> 
+            <a href="delete_laporan.php?halaman=user_delete&id_laporan=<?php echo $r['id_laporan'];?>" title="Hapus Data" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
             
     </tr>
 <?php 
